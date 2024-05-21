@@ -2,6 +2,8 @@
 import React, {useState} from 'react'
 import Link from 'next/link'
 import Navbar from '../components/Navbar'
+import { stringify } from 'querystring';
+import { ok } from 'assert';
 
 function RegisterPage() {
     const [name, setName] = useState("");
@@ -9,7 +11,7 @@ function RegisterPage() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
-    console.log(name,email,password,confirmPassword,error);
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
       e.preventDefault(); //prevent refresh
       if (password != confirmPassword){
@@ -18,6 +20,28 @@ function RegisterPage() {
       if(!name || !email || !password || !confirmPassword){
         setError("Please fill out all the forms");
         return;
+      }
+
+      try{
+        const res = await fetch("http://localhost:3000/api/register",{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name, email, password
+          })
+        })
+        if (res.ok){
+            const form = e.target as HTMLFormElement;
+            setError(""); //clear err
+            form.reset();
+        } else{
+          console.log("User registration failed.");
+        }
+      }
+      catch(e){
+
       }
     }
   return (
