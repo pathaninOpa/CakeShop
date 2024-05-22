@@ -25,34 +25,34 @@ def read_root():
     return {"dummy":"dummy"}
 
 @app.get("/api/register")
-async def get_usrinfo():
-    response = await fetch_all_usrinfo
+def get_Allusrinfo():
+    response =  fetch_all_usrinfo
     return response
 
 @app.get("/api/register{name}", response_model=user.USER)
-async def get_usrinfo_by_id(name):
+def get_usrinfo_by_id(name):
     response = fetch_one_usrinfo(name)
     if response:
         return response
     raise HTTPException(404, f"There is no User item with this name: {name}")
 
 @app.post("/api/register")
-async def post_usrinfo(usrinfo: user.USER):
-    response = await create_usrinfo(usrinfo.model_dump())
+def post_usrinfo(usrinfo: user.USER):
+    response =  create_usrinfo(usrinfo.model_dump())
     if response:
         return response
     raise HTTPException(400, "Something went wrong / Bad HTTP Request")
 
 @app.put("/api/register{name}/", response_model= user.USER)
-async def put_usrinfo(name: str, email: str, password: str):
-    response = await update_usrinfo(name, email, password)
+def put_usrinfo(name: str, email: str, password: str):
+    response =  update_usrinfo(name, email, password)
     if response:
         return response
     raise HTTPException(404, f"There is no User item with this name: {name}")
 
 @app.delete("/api/register{name}")
-async def delete_usrinfo(name):
-    response = await remove_usrinfo(name)
+def delete_usrinfo(name):
+    response =  remove_usrinfo(name)
     if response:
         return "Successfully deleted User Info.."
     raise HTTPException(404,  f"There is no User item with this name: {name}")

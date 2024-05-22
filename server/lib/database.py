@@ -25,29 +25,29 @@ mongodb.connectMongoDB(uri)
 targetDB = mongodb.client.Bakery
 targetCollection = targetDB.USERINFO
 
-async def fetch_one_usrinfo(name):
-    targetDocument = await targetCollection.find_one({"name":name})
+def fetch_one_usrinfo(name):
+    targetDocument =  targetCollection.find_one({"name":name})
     return targetDocument
-async def fetch_all_usrinfo():
+def fetch_all_usrinfo():
     usrinfo = []
     cursor = targetCollection.find({})
-    async for targetDocument in cursor:
+    for targetDocument in cursor:
         usrinfo.append(user.USER(**targetDocument))
     return usrinfo
-async def create_usrinfo(usrinfo):
+def create_usrinfo(usrinfo):
     targetDocument = usrinfo
-    result = await targetCollection.insert_one(targetDocument)
+    result =  targetCollection.insert_one(targetDocument)
     return targetDocument
 
-async def update_usrinfo(name, email, password):
-    await targetCollection.update_one({"$set":{
+def update_usrinfo(name, email, password):
+    targetCollection.update_one({"$set":{
         "name":name,
         "email":email,
         "password":password
         }})
-    targetDocument = await targetCollection.find_one({"name":name})
+    targetDocument =  targetCollection.find_one({"name":name})
     return targetDocument
 
-async def remove_usrinfo(name):
-    await targetCollection.delete_one({"name":name})
+def remove_usrinfo(name):
+    targetCollection.delete_one({"name":name})
     return True
