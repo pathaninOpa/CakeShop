@@ -1,18 +1,35 @@
 "use client"
-import React, {useState} from 'react'
+import React, {useState, useEffect, use} from 'react'
 import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import { stringify } from 'querystring';
 import { ok } from 'assert';
 import { NextResponse } from 'next/server';
+import axios from 'axios';
 
 function RegisterPage() {
+    const [usrinfo, setUsrInfo] = useState([{}]);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
 
+    useEffect(() => {
+      axios.get('http://localhost:8000/api/register')
+      .then(res => {
+        setUsrInfo(res.data)
+      })
+    });
+
+    // const addUsrInfoHandler = () => {
+    //   axios.post('http://localhost:8000/api/register', {
+    //     'name':name,
+    //     'email':email,
+    //     'password':password
+    //   })
+    //   .then(res => console.log(res))
+    // }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
       e.preventDefault(); //prevent refresh
         try{
@@ -24,16 +41,12 @@ function RegisterPage() {
               setError("Password do not match!!");
               return;
             }
-            const res = await fetch("http://localhost:3000/api/register",{
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                name, email, password
-              })
-            })
-            if (res.ok){
+            const res = await axios.post("http://localhost:8000/api/register",{
+              'name':name,
+              'email':email,
+              'password':password
+            });
+            if (res.status === 200){
                 const form = e.target as HTMLFormElement;
                 setError(""); //clear err
                 form.reset();

@@ -22,7 +22,7 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return {"Ping":"Pong"}
+    return {"dummy":"dummy"}
 
 @app.get("/api/register")
 async def get_usrinfo():
