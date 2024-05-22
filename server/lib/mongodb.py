@@ -28,7 +28,7 @@ class User(BaseModel):
 if __name__ == "__main__":
     load_dotenv
     app = FastAPI
-    # uvicorn.run(app, host="localhost", port=4000)
+    # uvicorn.run(app, host="localhost", port=8000)
     uri =os.getenv("uri")
     print("Error: no uri found in .env file") if (not uri) else print("fetched uri from .env")
     mongodb = MongoDB(uri)
