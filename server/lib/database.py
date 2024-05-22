@@ -30,7 +30,7 @@ def fetch_one_usrinfo(name):
     return targetDocument
 def fetch_all_usrinfo():
     usrinfo = []
-    cursor = targetCollection.find({})
+    cursor = targetCollection.find()
     for targetDocument in cursor:
         usrinfo.append(user.USER(**targetDocument))
     return usrinfo

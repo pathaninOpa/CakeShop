@@ -15,12 +15,12 @@ function RegisterPage() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
 
-    useEffect(() => {
-      axios.get('http://localhost:8000/api/register')
-      .then(res => {
-        setUsrInfo(res.data)
-      })
-    });
+    // useEffect(() => {
+    //   axios.get('http://localhost:8000/api/register')
+    //   .then(res => {
+    //     setUsrInfo(res.data)
+    //   })
+    // });
 
     // const addUsrInfoHandler = () => {
     //   axios.post('http://localhost:8000/api/register', {
@@ -41,7 +41,7 @@ function RegisterPage() {
               setError("Password do not match!!");
               return;
             }
-            const res = await axios.post("http://localhost:8000/api/register",{
+            const res = await axios.post("http://localhost:8000/api/register/",{
               'name':name,
               'email':email,
               'password':password
