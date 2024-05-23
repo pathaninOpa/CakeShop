@@ -64,13 +64,13 @@ def db_delete_usrinfo(name) -> List[user.USER]:
 
 ########################################################
 
-@app.get("/api/cakes",tags=['Cakes'])
-def db_get_all_cake_info() -> List[user.CAKE]:
-    response =  fetch_all_cake_info()
-    return response
+# @app.get("/api/cakes",tags=['Cakes'])
+# def db_get_all_cake_info() -> List[user.CAKE]:
+#     response =  fetch_all_cake_info()
+#     return response
 
-@app.get("/api/cakes{name}", response_model=user.CAKE,tags=['Cakes'])
-def db_get_cake_info_by_id(name) -> List[user.CAKE]:
+@app.get("/api/cakes", response_model=user.CAKE,tags=['Cakes'])
+def db_get_cake_info_by_id(name: str) -> List[user.CAKE]:
     response = fetch_one_cake_name(name)
     if response:
         return response

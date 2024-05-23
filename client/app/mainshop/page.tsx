@@ -1,12 +1,11 @@
 "use client"
-import React, {useState} from 'react'
+import React, { useEffect, useState } from 'react';
 import Registered_Navbar from '../components/Registered_Navbar';
 import Link from 'next/link'
 import axios from 'axios';
 
 function ShopPage(){
     const [name, getName] = useState("");
-    const [cakeData, setCakeData] = useState(null);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault(); //prevent refresh
@@ -19,10 +18,9 @@ function ShopPage(){
               });
               if (res.status === 200){
                   const form = e.target as HTMLFormElement;
-                  setCakeData(res.data);
                   form.reset();
-                  // localStorage.setItem('cakename',formattedName),
-                  // window.location.href = '/mainshop';
+                  localStorage.setItem('cakename',formattedName),
+                  window.location.href = '/mainshop';
               } else{
                 console.log("Cake search api failed.");
               }
@@ -40,20 +38,6 @@ function ShopPage(){
               <button type='submit' className='bg-blue-400 p-2 text-gray-50 rounded-md'>Search</button>
               </form>
             </div>
-            {/* Render cake data */}
-            {cakeData && (
-                <div className="flex justify-center">
-                    <h2>Cake Details</h2>
-                    <p>Name: {(cakeData as any).name}</p>
-                    <p>Short Description: {(cakeData as any).shortDescription}</p>
-                    <p>Description: {(cakeData as any).description}</p>
-                    <p>Image: {(cakeData as any).image}</p>
-                    <p>Ingredients: {(cakeData as any).ingredients}</p>
-                    <p>Recipe: {(cakeData as any).recipe}</p>
-                    <p>Stock: {(cakeData as any).stock}</p>
-                    {/* Render other cake data properties as needed */}
-                </div>
-            )}
         </div>
     
     )
