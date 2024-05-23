@@ -14,7 +14,8 @@ from lib.database import (
     fetch_all_cake_info,
     create_cake_info,
     update_cake_info,
-    remove_cake_info
+    remove_cake_info,
+    create_order_info
 )
 
 app.add_middleware(
@@ -96,3 +97,12 @@ def db_delete_cake_info(name) -> dict:
     if response:
         return {"message":f"Successfully deleted Cake({name}) Info.."}
     raise HTTPException(404,  f"There is no Cake with this name: {name}")
+
+########################################################
+
+@app.post("/api/orders", response_model=user.ORDER, tags=['Orders'])
+def db_post_order_info(OrderInfo: user.ORDER) -> List[user.ORDER]:
+    response =  create_order_info(OrderInfo.model_dump())
+    if response:
+        return response
+    raise HTTPException(400, "Something went wrong / Bad HTTP Request")

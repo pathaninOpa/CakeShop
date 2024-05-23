@@ -32,3 +32,14 @@ class CAKE(BaseModel):
         "recipe":self.recipe,
         "stock":self.stock
         }
+
+class ORDER(BaseModel):
+    name: str
+    UserName: str
+
+    def model_dump(self):
+        return {
+            "name":self.name,
+            "UserName":self.UserName,
+        }
+    

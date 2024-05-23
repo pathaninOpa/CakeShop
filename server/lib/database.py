@@ -25,6 +25,7 @@ mongodb.connectMongoDB(uri)
 targetDB = mongodb.client.Bakery
 targetCollection = targetDB.USERINFO
 CakeCollection = targetDB.cakes
+OrderCollection = targetDB.orders
 
 def fetch_one_usrinfo(name):
     targetDocument =  targetCollection.find_one({"name":name})
@@ -87,3 +88,10 @@ def update_cake_info(name, shortDescription, description, image, ingredients, re
 def remove_cake_info(name):
     CakeCollection.delete_one({"name":name})
     return True
+
+########################################################
+
+def create_order_info(OrderInfo):
+    OrderDocument = OrderInfo
+    result =  OrderCollection.insert_one(OrderDocument)
+    return OrderDocument
