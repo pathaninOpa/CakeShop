@@ -1,22 +1,22 @@
 # CakeShop
-Simple cake shop website with integration of MongoDB
+A simple cake shop website with integration of MongoDB
 
-# #Getting Started
+# Getting Started
 *Dont for get to change to your mongodb username and password in .env file and dont forget to change it back to <password> before git push/pull*
 
-# -requirement
-|->react
-|->node.js
-|->pymongo
-|->fastapi
-|->axios
-|->pydantic
+# requirement
+|->react<br>
+|->node.js<br>
+|->pymongo<br>
+|->fastapi<br>
+|->axios<br>
+|->pydantic<br>
 
-# -start_up
-|->front end
-  |->cd to client
-  |->npm run dev
+# start_up
+|->front end<br>
+  |->cd to client<br>
+  |->npm run dev<br>
 |->back end
-  |->activate .venv if have
-  |->cd to server
-  |->python -m uvicorn main:app --reload
+  |->activate .venv if have<br>
+  |->cd to server<br>
+  |->python -m uvicorn main:app --reload<br>
