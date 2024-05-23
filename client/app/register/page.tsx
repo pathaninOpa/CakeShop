@@ -41,7 +41,7 @@ function RegisterPage() {
               setError("Password do not match!!");
               return;
             }
-            const res = await axios.post("http://localhost:8000/api/register/",{
+            const res = await axios.post("http://localhost:8000/api/users",{
               'name':name,
               'email':email,
               'password':password
