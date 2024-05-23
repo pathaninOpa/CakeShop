@@ -24,6 +24,7 @@ mongodb = MongoDB(uri)
 mongodb.connectMongoDB(uri)
 targetDB = mongodb.client.Bakery
 targetCollection = targetDB.USERINFO
+CakeCollection = targetDB.cakes
 
 def fetch_one_usrinfo(name):
     targetDocument =  targetCollection.find_one({"name":name})
@@ -50,4 +51,39 @@ def update_usrinfo(name, email, password):
 
 def remove_usrinfo(name):
     targetCollection.delete_one({"name":name})
+    return True
+
+########################################################
+
+def fetch_one_cake_name(name):
+    CakeName =  CakeCollection.find_one({"name":name})
+    return CakeName
+
+def fetch_all_cake_info():
+    All_cake_info = []
+    cursor = CakeCollection.find()
+    for CakeDocument in cursor:
+        All_cake_info.append(user.CAKE(**CakeDocument))
+    return All_cake_info
+
+def create_cake_info(CakeInfo):
+    CakeDocument = CakeInfo
+    result =  CakeCollection.insert_one(CakeDocument)
+    return CakeDocument
+
+def update_cake_info(name, shortDescription, description, image, ingredients, recipe, stock):
+    CakeCollection.update_one({"$set":{
+        "name":name,
+        "shortDescription":shortDescription,
+        "description":description,
+        "image":image,
+        "ingredients":ingredients,
+        "recipe":recipe,
+        "stock":stock
+        }})
+    CakeDocument =  CakeCollection.find_one({"name":name})
+    return CakeDocument
+
+def remove_cake_info(name):
+    CakeCollection.delete_one({"name":name})
     return True

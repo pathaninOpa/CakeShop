@@ -6,30 +6,18 @@ import { stringify } from 'querystring';
 import { ok } from 'assert';
 import { NextResponse } from 'next/server';
 import axios from 'axios';
+import { useRouter } from 'next/router';
+
 
 function RegisterPage() {
-    const [usrinfo, setUsrInfo] = useState([{}]);
+    
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
 
-    // useEffect(() => {
-    //   axios.get('http://localhost:8000/api/register')
-    //   .then(res => {
-    //     setUsrInfo(res.data)
-    //   })
-    // });
-
-    // const addUsrInfoHandler = () => {
-    //   axios.post('http://localhost:8000/api/register', {
-    //     'name':name,
-    //     'email':email,
-    //     'password':password
-    //   })
-    //   .then(res => console.log(res))
-    // }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
       e.preventDefault(); //prevent refresh
         try{
@@ -50,6 +38,8 @@ function RegisterPage() {
                 const form = e.target as HTMLFormElement;
                 setError(""); //clear err
                 form.reset();
+                localStorage.setItem('name',name),
+                window.location.href = '/search';
             } else{
               console.log("User registration failed.");
             }
@@ -72,8 +62,8 @@ function RegisterPage() {
                 </div>
               )
             }
-            <input onChange={(e) => setName(e.target.value)} className="block bg-gray-300 p-2 my-2 rounded-md"type="email" placeholder="Enter your email" />
-            <input onChange={(e) => setEmail(e.target.value)} className="block bg-gray-300 p-2 my-2 rounded-md"type="text" placeholder="Enter your name" />
+            <input onChange={(e) => setEmail(e.target.value)} className="block bg-gray-300 p-2 my-2 rounded-md"type="email" placeholder="Enter your email" />
+            <input onChange={(e) => setName(e.target.value)} className="block bg-gray-300 p-2 my-2 rounded-md"type="text" placeholder="Enter your name" />
             <input onChange={(e) => setPassword(e.target.value)} className="block bg-gray-300 p-2 my-2 rounded-md"type="password" placeholder="Enter your password" />
             <input onChange={(e) => setConfirmPassword(e.target.value)} className="block bg-gray-300 p-2 my-2 rounded-md"type="password" placeholder="Confirm your password" />
             <button type='submit' className='bg-green-500 p-2 text-gray-50 rounded-md'>Sign up</button>
