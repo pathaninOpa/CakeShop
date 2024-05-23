@@ -1,10 +1,10 @@
 # CakeShop
 Simple cake shop website with integration of MongoDB
 
-#Getting Started
+# #Getting Started
 *Dont for get to change to your mongodb username and password in .env file and dont forget to change it back to <password> before git push/pull*
 
--requirement
+# -requirement
 |->react
 |->node.js
 |->pymongo
@@ -12,7 +12,7 @@ Simple cake shop website with integration of MongoDB
 |->axios
 |->pydantic
 
--start_up
+# -start_up
 |->front end
   |->cd to client
   |->npm run dev
