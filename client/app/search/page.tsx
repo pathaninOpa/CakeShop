@@ -49,8 +49,7 @@ function ShopPage(){
                         "UserName": usrname
                     });
                     if (res.status === 200){
-                        // localStorage.setItem('cakename',cakeData),
-                        // window.location.href = '/mainshop';
+                        window.location.href = '/thankyou';
                     } else{
                       console.log("Cake search api failed.");
                     }
